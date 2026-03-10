@@ -707,9 +707,9 @@ def channels_status():
     # Wecom
     wx = config.channels.wecom
     wx_config = (
-        f"client_id: {wx.client_id[:10]}..." if wx.client_id else "[dim]not configured[/dim]"
+        f"bot_id: {wx.bot_id[:10]}..." if wx.bot_id else "[dim]not configured[/dim]"
     )
-    table.add_row("Wecom", "✓" if dt.enabled else "✗", wx_config)
+    table.add_row("Wecom", "✓" if wx.enabled else "✗", wx_config)
 
     # QQ
     qq = config.channels.qq
