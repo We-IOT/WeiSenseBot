@@ -600,6 +600,227 @@ weisensebot gateway
   }
 }
 ```
+## config.json的例子
+
+```
+{
+  "agents": {
+    "defaults": {
+      "workspace": "~/.weisensebot/workspace",
+      "model": "anthropic/claude-opus-4-5",
+      "maxTokens": 8192,
+      "temperature": 0.7,
+      "maxToolIterations": 20
+    }
+  },
+  "channels": {
+    "whatsapp": {
+      "enabled": false,
+      "bridgeUrl": "ws://localhost:3001",
+      "allowFrom": []
+    },
+    "telegram": {
+      "enabled": false,
+      "token": "",
+      "allowFrom": [],
+      "proxy": null
+    },
+    "discord": {
+      "enabled": false,
+      "token": "",
+      "allowFrom": [],
+      "gatewayUrl": "wss://gateway.discord.gg/?v=10&encoding=json",
+      "intents": 37377
+    },
+    "feishu": {
+      "enabled": false,
+      "appId": "",
+      "appSecret": "",
+      "encryptKey": "",
+      "verificationToken": "",
+      "allowFrom": []
+    },
+    "mochat": {
+      "enabled": false,
+      "baseUrl": "https://mochat.io",
+      "socketUrl": "",
+      "socketPath": "/socket.io",
+      "socketDisableMsgpack": false,
+      "socketReconnectDelayMs": 1000,
+      "socketMaxReconnectDelayMs": 10000,
+      "socketConnectTimeoutMs": 10000,
+      "refreshIntervalMs": 30000,
+      "watchTimeoutMs": 25000,
+      "watchLimit": 100,
+      "retryDelayMs": 500,
+      "maxRetryAttempts": 0,
+      "clawToken": "",
+      "agentUserId": "",
+      "sessions": [],
+      "panels": [],
+      "allowFrom": [],
+      "mention": {
+        "requireInGroups": false
+      },
+      "groups": {},
+      "replyDelayMode": "non-mention",
+      "replyDelayMs": 120000
+    },
+    "dingtalk": {
+      "enabled": true,
+      "clientId": "dingoz5hiecx5ttstxdi",
+      "clientSecret": "aTGdQnUSW7V-oSW-CewdRXWbw62q-9XwA2JEQLk_4-UQxGp3eUzBB7JfwxFyepyv",
+      "allowFrom": ["*"]
+    },
+    "email": {
+      "enabled": true,
+      "consentGranted": true,
+      "imapHost": "imap.qq.com",
+      "imapPort": 993,
+      "imapUsername": "gaoshine2008@qq.com",
+      "imapPassword": "jovuwrdmozmdbfij",
+      "imapMailbox": "INBOX",
+      "imapUseSsl": true,
+      "smtpHost": "smtp.qq.com",
+      "smtpPort": 465,
+      "smtpUsername": "gaoshine2008@qq.com",
+      "smtpPassword": "jovuwrdmozmdbfij",
+      "smtpUseTls": false,
+      "smtpUseSsl": true,
+      "fromAddress": "gaoshine2008@qq.com",
+      "autoReplyEnabled": true,
+      "pollIntervalSeconds": 30,
+      "markSeen": true,
+      "maxBodyChars": 12000,
+      "subjectPrefix": "Re: ",
+      "allowFrom": ["*"]
+    },
+    "slack": {
+      "enabled": false,
+      "mode": "socket",
+      "webhookPath": "/slack/events",
+      "botToken": "",
+      "appToken": "",
+      "userTokenReadOnly": true,
+      "groupPolicy": "mention",
+      "groupAllowFrom": [],
+      "dm": {
+        "enabled": true,
+        "policy": "open",
+        "allowFrom": []
+      }
+    },
+    "qq": {
+      "enabled": false,
+      "appId": "",
+      "secret": "",
+      "allowFrom": []
+    },
+    "wechat": {
+      "enabled": false,
+      "listenChats": [],
+      "allowFrom": []
+    },
+
+    "wecom": {
+      "enabled": true,
+      "bot_id": "aibNE6Uga0k6vJZjJ_XbxpqY_LtJK2JIBc4",
+      "secret": "N4y69aYPlM2astwQAWqEpQveG2BRKL1xSXDDwVEZnkR",
+      "welcome_message": "Welcome to the WeCom bot!",
+      "allowFrom": ["*"]
+
+    }
+  },
+ 
+  "providers": {
+    "anthropic": {
+      "apiKey": "",
+      "apiBase": null,
+      "extraHeaders": null
+    },
+    "openai": {
+      "apiKey": "",
+      "apiBase": null,
+      "extraHeaders": null
+    },
+    "openrouter": {
+      "apiKey": "",
+      "apiBase": null,
+      "extraHeaders": null
+    },
+    "deepseek": {
+      "apiKey": "",
+      "apiBase": null,
+      "extraHeaders": null
+    },
+    "groq": {
+      "apiKey": "",
+      "apiBase": null,
+      "extraHeaders": null
+    },
+    "zhipu": {
+      "apiKey": "0219a16e2f0949f09811107e3b5f59e3.3iWQCDuZj2ht4utn",
+      "apiBase": "https://open.bigmodel.cn/api/coding/paas/v4",
+      "extraHeaders": null
+    },
+    "dashscope": {
+      "apiKey": "",
+      "apiBase": null,
+      "extraHeaders": null
+    },
+    "vllm": {
+      "apiKey": "",
+      "apiBase": "",
+      "extraHeaders": null
+    },
+    "gemini": {
+      "apiKey": "",
+      "apiBase": null,
+      "extraHeaders": null
+    },
+    "moonshot": {
+      "apiKey": "",
+      "apiBase": null,
+      "extraHeaders": null
+    },
+    "minimax": {
+      "apiKey": "",
+      "apiBase": null,
+      "extraHeaders": null
+    },
+    "aihubmix": {
+      "apiKey": "",
+      "apiBase": null,
+      "extraHeaders": null
+    }
+  },
+    "agents": {
+    "defaults": {
+      "model": "glm-4.7"
+    }
+  },
+
+  "gateway": {
+    "host": "0.0.0.0",
+    "port": 18790
+  },
+  "tools": {
+    "web": {
+      "search": {
+        "apiKey": "",
+        "maxResults": 5
+      }
+    },
+    "exec": {
+      "timeout": 60
+    },
+    "restrictToWorkspace": false
+  }
+}
+
+```
+
+
 
 
 **3. 运行**

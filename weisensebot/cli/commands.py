@@ -704,6 +704,13 @@ def channels_status():
     )
     table.add_row("DingTalk", "✓" if dt.enabled else "✗", dt_config)
 
+    # Wecom
+    wx = config.channels.wecom
+    wx_config = (
+        f"client_id: {wx.client_id[:10]}..." if wx.client_id else "[dim]not configured[/dim]"
+    )
+    table.add_row("Wecom", "✓" if dt.enabled else "✗", wx_config)
+
     # QQ
     qq = config.channels.qq
     qq_config = f"app_id: {qq.app_id[:10]}..." if qq.app_id else "[dim]not configured[/dim]"
