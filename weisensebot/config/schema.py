@@ -48,21 +48,16 @@ class DiscordConfig(Base):
     group_policy: Literal["mention", "open"] = "mention"
 
 
-class WeComConfig(Base):
-    """Enterprise WeChat (WeCom) channel configuration."""
+
+class WecomConfig(Base):
+    """WeCom (Enterprise WeChat) AI Bot channel configuration."""
 
     enabled: bool = False
-    corp_id: str = ""  # Enterprise ID from WeCom admin
-    agent_id: int = 0  # Agent ID from WeCom admin
-    corp_secret: str = ""  # Agent Secret from WeCom admin
-    token: str = ""  # Verification Token from WeCom callback settings
-    encoding_aes_key: str = ""  # Encoding AES Key from WeCom callback settings
-    callback_port: int = 18791  # Local port for webhook callback server
-    callback_path: str = "/wecom/callback"  # Webhook callback path
-    api_base: str | None = None  # Custom API base URL (optional)
-    allow_from: list[str] = Field(
-        default_factory=list
-    )  # Allowed user IDs or department IDs
+    bot_id: str = ""  # Bot ID from WeCom AI Bot platform
+    secret: str = ""  # Bot Secret from WeCom AI Bot platform
+    allow_from: list[str] = Field(default_factory=list)  # Allowed user IDs
+    welcome_message: str = ""  # Welcome message for enter_chat event
+    react_emoji: str = "eyes"  # Emoji for message reactions
 
 
 class MatrixConfig(Base):
@@ -118,6 +113,16 @@ class EmailConfig(Base):
     max_body_chars: int = 12000
     subject_prefix: str = "Re: "
     allow_from: list[str] = Field(default_factory=list)  # Allowed sender email addresses
+
+class WecomConfig(Base):
+    """WeCom (Enterprise WeChat) AI Bot channel configuration."""
+
+    enabled: bool = False
+    bot_id: str = ""  # Bot ID from WeCom AI Bot platform
+    secret: str = ""  # Bot Secret from WeCom AI Bot platform
+    allow_from: list[str] = Field(default_factory=list)  # Allowed user IDs
+    welcome_message: str = ""  # Welcome message for enter_chat event
+    react_emoji: str = "eyes"  # Emoji for message reactions
 
 
 class MochatMentionConfig(Base):
@@ -208,7 +213,7 @@ class ChannelsConfig(Base):
     slack: SlackConfig = Field(default_factory=SlackConfig)
     qq: QQConfig = Field(default_factory=QQConfig)
     matrix: MatrixConfig = Field(default_factory=MatrixConfig)
-    wecom: WeComConfig = Field(default_factory=WeComConfig)
+    wecom: WecomConfig = Field(default_factory=WecomConfig)
 
 
 class AgentDefaults(Base):

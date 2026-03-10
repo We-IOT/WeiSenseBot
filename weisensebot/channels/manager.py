@@ -110,10 +110,11 @@ class ChannelManager:
         # WeCom channel
         if self.config.channels.wecom.enabled:
             try:
-                from weisensebot.channels.wecom import WeComChannel
-                self.channels["wecom"] = WeComChannel(
+                from weisensebot.channels.wecom import WecomChannel
+                self.channels["wecom"] = WecomChannel(
                     self.config.channels.wecom,
                     self.bus,
+                    groq_api_key=self.config.providers.groq.api_key,
                 )
                 logger.info("WeCom channel enabled")
             except ImportError as e:
