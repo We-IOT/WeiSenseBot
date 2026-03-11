@@ -553,7 +553,7 @@ def agent(
 
         _init_prompt_session()
         console.print(
-            f"{__logo__} 交互模式 (输入 [bold]exit[/bold] 或 [bold]Ctrl+C[/bold] 可以退出)\n"
+            f"{__logo__} 交互模式 (输入 [bold]exit[/bold] 或 [bold]Ctrl+C[/bold] 可以退出)\n [dim]微妙物联人工智能实验室 2026.03 Gaoshine.[/dim]"
         )
 
         if ":" in session_id:

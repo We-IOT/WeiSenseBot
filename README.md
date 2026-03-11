@@ -68,17 +68,7 @@ cd weisensebot
 pip install -e .
 ```
 
-**使用[uv](https://github.com/astral-sh/uv)安装**（稳定、快速）
 
-```bash
-uv tool install weisensebot-ai
-```
-
-**从PyPI安装**（稳定版）
-
-```bash
-pip install weisensebot-ai
-```
 
 ## 🚀 快速开始
 
@@ -135,13 +125,12 @@ weisensebot agent
 |---------|---------------|
 | **Telegram** | 来自@BotFather的Bot令牌 |
 | **Discord** | Bot令牌 + 消息内容意图 |
-| **WhatsApp** | 二维码扫描 |
 | **Feishu（飞书）** | App ID + App Secret |
-| **Mochat** | Claw令牌（可自动设置） |
 | **DingTalk（钉钉）** | App Key + App Secret |
 | **Slack** | Bot令牌 + 应用级令牌 |
 | **Email（电子邮件）** | IMAP/SMTP凭据 |
 | **QQ** | App ID + App Secret |
+| **Wecom** | App ID + App Secret |
 
 <details>
 <summary><b>Telegram</b>（推荐）</summary>
@@ -284,111 +273,7 @@ weisensebot gateway
 
 </details>
 
-<details>
-<summary><b>Matrix (Element)</b></summary>
 
-首先安装Matrix依赖：
-
-```bash
-pip install weisensebot-ai[matrix]
-```
-
-**1. 创建/选择Matrix账户**
-
-- 在您的家庭服务器上创建或重用Matrix账户（例如`matrix.org`）。
-- 确认您可以使用Element登录。
-
-**2. 获取凭据**
-
-- 您需要：
-  - `userId`（例如：`@weisensebot:matrix.org`）
-  - `accessToken`
-  - `deviceId`（推荐，以便跨重启恢复同步令牌）
-- 您可以从家庭服务器登录API（`/_matrix/client/v3/login`）或客户端的高级会话设置中获取这些信息。
-
-**3. 配置**
-
-```json
-{
-  "channels": {
-    "matrix": {
-      "enabled": true,
-      "homeserver": "https://matrix.org",
-      "userId": "@weisensebot:matrix.org",
-      "accessToken": "syt_xxx",
-      "deviceId": "NANOBOT01",
-      "e2eeEnabled": true,
-      "allowFrom": ["@your_user:matrix.org"],
-      "groupPolicy": "open",
-      "groupAllowFrom": [],
-      "allowRoomMentions": false,
-      "maxMediaBytes": 20971520
-    }
-  }
-}
-```
-
-> 保持持久的`matrix-store`和稳定的`deviceId` — 如果这些在重启之间更改，加密的会话状态将丢失。
-
-| 选项 | 描述 |
-|--------|-------------|
-| `allowFrom` | 允许交互的用户ID。空 = 所有发送者。 |
-| `groupPolicy` | `open`（默认）、`mention`或`allowlist`。 |
-| `groupAllowFrom` | 房间允许列表（当策略为`allowlist`时使用）。 |
-| `allowRoomMentions` | 在提及模式下接受`@room`提及。 |
-| `e2eeEnabled` | E2EE支持（默认`true`）。设置为`false`以仅使用纯文本。 |
-| `maxMediaBytes` | 最大附件大小（默认`20MB`）。设置为`0`以阻止所有媒体。 |
-
-
-
-**4. 运行**
-
-```bash
-weisensebot gateway
-```
-
-</details>
-
-<details>
-<summary><b>WhatsApp</b></summary>
-
-需要**Node.js ≥18**。
-
-**1. 链接设备**
-
-```bash
-weisensebot channels login
-# 使用WhatsApp扫描二维码 → 设置 → 关联设备
-```
-
-**2. 配置**
-
-```json
-{
-  "channels": {
-    "whatsapp": {
-      "enabled": true,
-      "allowFrom": ["+1234567890"]
-    }
-  }
-}
-```
-
-**3. 运行**（两个终端）
-
-```bash
-# 终端1
-weisensebot channels login
-
-# 终端2
-weisensebot gateway
-```
-
-> WhatsApp网桥更新不会自动应用于现有安装。
-> 如果您升级weisensebot并需要最新的WhatsApp网桥，请运行：
-> `rm -rf ~/.weisensebot/bridge && weisensebot channels login`
-
-</details>
 
 <details>
 <summary><b>Feishu（飞书）</b></summary>
