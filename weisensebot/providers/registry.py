@@ -349,7 +349,7 @@ PROVIDERS: tuple[ProviderSpec, ...] = (
         keywords=("vllm",),
         env_key="HOSTED_VLLM_API_KEY",
         display_name="vLLM/Local",
-        litellm_prefix="hosted_vllm",  # Llama-3-8B → hosted_vllm/Llama-3-8B
+        litellm_prefix="vllm",  # Llama-3-8B → hosted_vllm/Llama-3-8B
         skip_prefixes=(),
         env_extras=(),
         is_gateway=False,
@@ -379,6 +379,26 @@ PROVIDERS: tuple[ProviderSpec, ...] = (
         strip_model_prefix=False,
         model_overrides=(),
     ),
+
+    # === Ollama (local OpenAI-compatible endpoint) =========================
+    ProviderSpec(
+        name="ollama",
+        keywords=("ollama",),
+        env_key="OPENAI_API_KEY",
+        display_name="Ollama",
+        litellm_prefix="ollama",
+        skip_prefixes=(),
+        env_extras=(),
+        is_gateway=False,
+        is_local=True,
+        detect_by_key_prefix="",
+        detect_by_base_keyword="11434",
+        default_api_base="http://butest.weiot.site:11434",
+        strip_model_prefix=False,
+        model_overrides=(),
+        is_direct=True,
+    ),
+
 )
 
 

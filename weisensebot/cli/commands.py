@@ -214,17 +214,34 @@ def _make_provider(config: Config):
     """Create the appropriate LLM provider from config."""
     from weisensebot.providers.openai_codex_provider import OpenAICodexProvider
     from weisensebot.providers.azure_openai_provider import AzureOpenAIProvider
+    from weisensebot.providers.registry import find_by_name
 
     model = config.agents.defaults.model
     provider_name = config.get_provider_name(model)
     p = config.get_provider(model)
 
+    spec = find_by_name(provider_name) if provider_name else None
+
+    if config.agents.defaults.provider != "auto" and spec is None:
+        console.print(f"[red]Error: Unknown provider: {config.agents.defaults.provider}[/red]")
+        console.print("Check ~/.weisensebot/config.json under agents.defaults.provider")
+        raise typer.Exit(1)
+    
     # OpenAI Codex (OAuth)
     if provider_name == "openai_codex" or model.startswith("openai-codex/"):
         return OpenAICodexProvider(default_model=model)
 
     # Custom: direct OpenAI-compatible endpoint, bypasses LiteLLM
     from weisensebot.providers.custom_provider import CustomProvider
+
+    api_base = config.get_api_base(model)
+    if provider_name == "ollama":
+        api_base = (api_base or "http://localhost:11434").rstrip("/")
+        return CustomProvider(
+            api_key=p.api_key if p else "no-key",
+            api_base=api_base,
+            default_model=model,
+        )
 
     if provider_name == "custom":
         return CustomProvider(

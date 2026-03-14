@@ -644,7 +644,7 @@ weisensebot gateway
       "extraHeaders": null
     },
     "zhipu": {
-      "apiKey": "0219a16e2f0949f09811107e3b5f59e3.3iWQCDuZj2ht4utn",
+      "apiKey": "",
       "apiBase": "https://open.bigmodel.cn/api/coding/paas/v4",
       "extraHeaders": null
     },
@@ -677,11 +677,16 @@ weisensebot gateway
       "apiKey": "",
       "apiBase": null,
       "extraHeaders": null
-    }
+    },
+      "ollama": {
+      "apiKey": "ollama",
+      "apiBase": "http://butest.weiot.site:11434/v1",
+      "extraHeaders": null
+    },
   },
     "agents": {
     "defaults": {
-      "model": "glm-4.7"
+      "model": "qwen3.5:35b-a3b-q4_K_M"
     }
   },
 
