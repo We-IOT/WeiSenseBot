@@ -120,6 +120,17 @@ class ChannelManager:
             except ImportError as e:
                 logger.warning("WeCom channel not available: {}", e)
 
+        # Weixin channel
+        if self.config.channels.weixin.enabled:
+            try:
+                from weisensebot.channels.weixin import WeixinChannel
+                self.channels["weixin"] = WeixinChannel(
+                    self.config.channels.weixin,
+                    self.bus,
+                )
+                logger.info("Weixin channel enabled")
+            except ImportError as e:
+                logger.warning("Weixin channel not available: {}", e)
 
         # Matrix channel
         if self.config.channels.matrix.enabled:

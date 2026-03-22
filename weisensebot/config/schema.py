@@ -124,6 +124,17 @@ class WecomConfig(Base):
     welcome_message: str = ""  # Welcome message for enter_chat event
     react_emoji: str = "eyes"  # Emoji for message reactions
 
+class WeixinConfig(Base):
+    """Personal WeChat (微信) channel configuration using HTTP long-poll API."""
+
+    enabled: bool = False
+    allow_from: list[str] = Field(default_factory=list)  # Allowed user IDs
+    base_url: str = "https://ilinkai.weixin.qq.com"
+    cdn_base_url: str = "https://novac2c.cdn.weixin.qq.com/c2c"
+    token: str = ""  # Manually set token, or obtained via QR login
+    state_dir: str = "~/.wisensebot/weixin/"  # Default: ~/.nanobot/weixin/
+    poll_timeout: int = 35  # seconds for long-poll
+
 
 class MochatMentionConfig(Base):
     """Mochat mention behavior configuration."""
@@ -214,6 +225,7 @@ class ChannelsConfig(Base):
     qq: QQConfig = Field(default_factory=QQConfig)
     matrix: MatrixConfig = Field(default_factory=MatrixConfig)
     wecom: WecomConfig = Field(default_factory=WecomConfig)
+    weixin: WeixinConfig = Field(default_factory=WeixinConfig)
 
 
 class AgentDefaults(Base):

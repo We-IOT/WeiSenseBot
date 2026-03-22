@@ -44,6 +44,8 @@ dependencies = [
     "chardet>=3.0.2,<6.0.0",
     "openai>=2.8.0",
     "wecom-aibot-sdk-python>=0.1.2",
+    "qrcode[pil]>=8.0",
+    "pycryptodome>=3.20.0",
     ]
 
 [project.optional-dependencies]
