@@ -131,6 +131,8 @@ weisensebot agent
 | **Email（电子邮件）** | IMAP/SMTP凭据 |
 | **QQ** | App ID + App Secret |
 | **Wecom** | App ID + App Secret |
+| **Weixin** | QRScan 扫码登录|
+
 
 <details>
 <summary><b>Telegram</b>（推荐）</summary>
@@ -440,6 +442,32 @@ weisensebot gateway
 
 </details>
 
+<details>
+<summary><b>Weixin (微信)</b></summary>
+
+> 微信升级最新版，安装微信clawer插件，获取微信的登录二维码，扫码登录，获取登录信息，配置到配置> 文件中。
+
+
+**3. Configure**
+
+```json
+{
+  "channels": {
+    "weixin": {
+      "enabled": true,
+      "allowFrom": ["*"]
+    }
+  }
+}
+```
+
+**4. Run**
+
+```bash
+weisensebot gateway
+```
+> 微信扫一扫，就可以使用微信机器人了
+</details>
 
 
 
@@ -1167,6 +1195,10 @@ journalctl --user -u weisensebot-gateway -f        # 跟踪日志
 > ```bash
 > loginctl enable-linger $USER
 > ```
+
+## 📦 打包
+> pyinstaller --onefile --collect-all litellm   --name=weisenbotapp run.py
+
 
 ## 📁 项目结构
 
