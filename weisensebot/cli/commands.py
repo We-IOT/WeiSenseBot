@@ -212,7 +212,6 @@ def onboard():
 
 def _make_provider(config: Config):
     """Create the appropriate LLM provider from config."""
-    from weisensebot.providers.openai_codex_provider import OpenAICodexProvider
     from weisensebot.providers.azure_openai_provider import AzureOpenAIProvider
     from weisensebot.providers.registry import find_by_name
 
@@ -229,7 +228,13 @@ def _make_provider(config: Config):
     
     # OpenAI Codex (OAuth)
     if provider_name == "openai_codex" or model.startswith("openai-codex/"):
-        return OpenAICodexProvider(default_model=model)
+        try:
+            from weisensebot.providers.openai_codex_provider import OpenAICodexProvider
+            return OpenAICodexProvider(default_model=model)
+        except ImportError as e:
+            console.print(f"[red]Error: OpenAI Codex provider requires optional dependency: {e}[/red]")
+            console.print("Install with: pip install oauth-cli-kit")
+            raise typer.Exit(1)
 
     # Custom: direct OpenAI-compatible endpoint, bypasses LiteLLM
     from weisensebot.providers.custom_provider import CustomProvider
@@ -730,6 +735,14 @@ def channels_status():
         f"bot_id: {wx.bot_id[:10]}..." if wx.bot_id else "[dim]not configured[/dim]"
     )
     table.add_row("Wecom", "✓" if wx.enabled else "✗", wx_config)
+
+    # Weixin
+    wx0 = config.channels.weixin
+    wx0_config = (
+        f"{wx0.base_url}..." if wx0.base_url else "[dim]not configured[/dim]"
+    )
+    table.add_row("Weixin", "✓" if wx0.enabled else "✗", wx0_config)
+
 
     # QQ
     qq = config.channels.qq
